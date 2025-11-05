@@ -20,7 +20,7 @@ mongoose.connect(mongodbUrl)
     .catch((err) => console.error("❌ MongoDB connection error:", err));
 
 // Routes
-app.get("/tasks", async (req, res) => {
+app.get("/boards", async (req, res) => {
     try {
         res.send("fd");
     } catch (error) {
