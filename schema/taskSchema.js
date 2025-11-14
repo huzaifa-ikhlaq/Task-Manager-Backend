@@ -1,14 +1,14 @@
 import mongoose from "mongoose";
 
 const taskSchema = new mongoose.Schema({
-    title: {
+    title: { type: String, required: true },
+    status: {
         type: String,
-        required: true
+        enum: ["todo", "progress", "done"],
+        default: "todo",
     },
-    createdAt: {
-        type: Date,
-        default: Date.now,
-    },
+    boardId: { type: mongoose.Schema.Types.ObjectId, ref: "Board", required: true },
+    createdAt: { type: Date, default: Date.now },
 })
 
-export default taskSchema
+export default taskSchema 
