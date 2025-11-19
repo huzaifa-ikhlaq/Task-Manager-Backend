@@ -160,10 +160,10 @@ app.delete("/boards/:boardId/tasks/:taskId", async (req, res) => {
 // ===login ===
 app.post("/login", async (req, res) => {
     try {
-        const { userName, userEmail, password } = req.body;
+        const { userEmail, password } = req.body;
 
-        if (!userName || !userEmail || !password) {
-            return res.status(400).json({ error: "All fields are required" });
+        if (!userEmail || !password) {
+            return res.status(400).json({ error: "Email and Password are required" });
         }
 
         const user = await User.findOne({ email: userEmail });
@@ -178,7 +178,9 @@ app.post("/login", async (req, res) => {
             { expiresIn: "7d" }
         );
 
-        res.json({ message: "Login successful", token });
+        res.json({
+            message: "Login successful", token, userName: user.userName, email: user.email
+        });
 
     } catch (error) {
         console.error("❌ Login Error:", error);
